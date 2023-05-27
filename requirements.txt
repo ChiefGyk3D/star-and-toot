@@ -1,0 +1,2 @@
+PyGithub==1.55
+Mastodon.py==1.5.1
