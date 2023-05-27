@@ -22,8 +22,10 @@ pip install -r requirements.txt
 access_token = your_github_token
 
 [Mastodon]
-access_token = your_mastodon_token
-api_base_url = your_mastodon_instance_url
+access_token = your_access_token_here
+api_base_url = https://your.mastodon.instance
+client_id = your_client_id_here
+client_secret = your_client_secret_here
 ```
 
 5. Run the bot:
