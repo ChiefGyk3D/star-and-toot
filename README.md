@@ -40,6 +40,49 @@ access_token_secret = your_access_token_secret
     python star-and-toot.py
 ```
 
+## Running as a systemd Service
+
+If you are running this bot on a system with systemd, you can configure it as a service so it starts automatically on system boot. Follow these steps:
+
+1. Create a systemd service file, e.g., star-and-toot.service. Service files are typically stored in /etc/systemd/system/:
+
+```
+sudo nano /etc/systemd/system/star-and-toot.service
+```
+
+2. In the service file, add the following content (replace user and /path/to/script with your actual username and the absolute path to your Python script):
+
+```
+[Unit]
+Description=Star and Toot GitHub-Mastodon integration
+
+[Service]
+ExecStart=/usr/bin/python3 /path/to/star-and-toot.py
+User=user
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+
+3. Reload the systemd manager configuration:
+
+```
+sudo systemctl daemon-reload
+```
+
+4. Start the service:
+
+```
+sudo systemctl start star-and-toot.service
+```
+
+5. Enable the service to start on boot:
+
+```
+sudo systemctl enable star-and-toot.service
+```
+
 ## Configuration
 
 All configuration is done through the config.ini file. You'll need to provide your GitHub and Mastodon API credentials:
