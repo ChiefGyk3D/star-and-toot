@@ -2,6 +2,7 @@ import time
 from github import Github
 from mastodon import Mastodon
 import configparser
+import tweepy
 
 # Parse the config file
 config = configparser.ConfigParser()
@@ -19,10 +20,6 @@ mastodon_api_base_url = config.get('Mastodon', 'api_base_url')
 mastodon_client_id = config.get('Mastodon', 'client_id')
 mastodon_client_secret = config.get('Mastodon', 'client_secret')
 
-# Append /api/v1 to the base URL if it is not already present
-if not mastodon_api_base_url.endswith('/api/v1'):
-    mastodon_api_base_url += '/api/v1'
-
 # Create Mastodon API instance
 mastodon = Mastodon(
     client_id=mastodon_client_id,
@@ -30,6 +27,19 @@ mastodon = Mastodon(
     access_token=mastodon_token,
     api_base_url=mastodon_api_base_url
 )
+
+# Check if Twitter is enabled in config
+enable_twitter = config.getboolean('Twitter', 'enable_twitter', fallback=False)
+
+# Create Twitter API instance if enabled
+if enable_twitter:
+    consumer_key = config.get('Twitter', 'consumer_key')
+    consumer_secret = config.get('Twitter', 'consumer_secret')
+    access_token = config.get('Twitter', 'access_token')
+    access_token_secret = config.get('Twitter', 'access_token_secret')
+    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+    auth.set_access_token(access_token, access_token_secret)
+    twitter = tweepy.API(auth)
 
 # Get your user
 user = g.get_user()
@@ -47,6 +57,8 @@ def check_for_new_starred_repos():
         for repo in new_starred:
             message = f"I just starred a new repository on GitHub: {repo.html_url}"
             mastodon.status_post(message)
+            if enable_twitter:
+                twitter.update_status(message)  # optional Twitter functionality
         starred = user.get_starred()
 
 # Periodically check for new starred repos
