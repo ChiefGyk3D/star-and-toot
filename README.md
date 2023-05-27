@@ -1,11 +1,10 @@
 # Star and Toot
+
 ## GitHub Starred Repo Notifier for Mastodon
 
-This is a simple bot that monitors starred repositories on GitHub and posts a status update on Mastodon whenever a new repository is starred.
+"Star and Toot" is a bot that monitors when you star new repositories on GitHub and posts a status update ("Toot") on your Mastodon account. As a secondary feature, it can also post to Twitter. However, we emphasize a Mastodon-first approach to microblogging in this project.
 
-Note: This bot is currently under testing. If you encounter any bugs or issues, please report them through the issue tracker.
-
-## Setup 
+## Setup
 
 1. Clone this repository.
 2. Install the necessary dependencies using pip:
@@ -26,6 +25,13 @@ access_token = your_access_token_here
 api_base_url = https://your.mastodon.instance
 client_id = your_client_id_here
 client_secret = your_client_secret_here
+
+[Twitter]
+enable_twitter = false
+consumer_key = your_consumer_key
+consumer_secret = your_consumer_secret
+access_token = your_access_token
+access_token_secret = your_access_token_secret
 ```
 
 5. Run the bot:
@@ -45,4 +51,14 @@ All configuration is done through the config.ini file. You'll need to provide yo
 Remember to replace 'your_github_token', 'your_mastodon_token', and 'your_mastodon_instance_url' with your actual tokens and URLs in the config.ini file.
 Contributing
 
-We welcome contributions of all kinds. If you have a feature request, bug report, or code contribution, please use the issue tracker or open a pull request.
+## Support
+
+You can also tip the author with the following cryptocurrency addresses:
+
+    Bitcoin: bc1q5grpa7ramcct4kjmwexfrh74dvjuw9wczn4w2f
+    Monero: 85YxVz8Xd7sW1xSiyzUC5PNqSjYLYk4W8FMERVkvznR38jGTBEViWQSLCnzRYZjmxgUkUKGhxTt2JSFNpJuAqghQLhHgPS5
+    PIVX: DS1CuBQkiidwwPhkfVfQAGUw4RTWPnBXVM
+    Ethereum: 0x2a460d48ab404f191b14e9e0df05ee829cbf3733
+
+## Connect
+- [ChiefGyk3D's Mastodon Account](https://social.chiefgyk3d.com/@chiefgyk3d)
